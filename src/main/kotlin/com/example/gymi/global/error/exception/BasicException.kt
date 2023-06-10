@@ -5,4 +5,4 @@ import com.example.gymi.global.error.ErrorCode
 class BasicException(
 
         val errorCode: ErrorCode
-): RuntimeException()
+) : RuntimeException()
