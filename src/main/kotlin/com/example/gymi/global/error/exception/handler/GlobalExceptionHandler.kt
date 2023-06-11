@@ -1,7 +1,7 @@
-package com.example.gymi.global.error.handler
+package com.example.gymi.global.error.exception.handler
 
-import com.example.gymi.global.error.ErrorCode
-import com.example.gymi.global.error.ErrorResponse
+import com.example.gymi.global.error.exception.ErrorCode
+import com.example.gymi.global.error.exception.ErrorResponse
 import com.example.gymi.global.error.exception.BasicException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus

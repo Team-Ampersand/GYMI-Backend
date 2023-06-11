@@ -1,4 +1,4 @@
-package com.example.gymi.global.error
+package com.example.gymi.global.error.exception
 
 enum class ErrorCode(
 
