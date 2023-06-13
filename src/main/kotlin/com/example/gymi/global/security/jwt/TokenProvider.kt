@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest
 
 @Component
 class TokenProvider(
-
         private val jwtProperties: JwtProperties,
         private val tokenTimeProperties: TokenTimeProperties,
         private val authDetailService: AuthDetailService,
@@ -59,7 +58,10 @@ class TokenProvider(
 
     fun exactRoleFromRefreshToken(refresh: String): Role {
 
-        return when (getTokenBody(refresh, jwtProperties.refreshSecret).get(AUTHORITY, String::class.java)) {
+        val authority = getTokenBody(refresh, jwtProperties.refreshSecret)
+                .get(AUTHORITY, String::class.java)
+
+        return when (authority) {
 
             "ROLE_STUDENT" -> Role.ROLE_STUDENT
             "ROLE_ADMIN" -> Role.ROLE_ADMIN
@@ -78,7 +80,10 @@ class TokenProvider(
     }
 
     fun parseToken(token: String): String? =
-            if (token.startsWith(TOKEN_PREFIX)) token.replace(TOKEN_PREFIX, "") else null
+            if (token.startsWith(TOKEN_PREFIX))
+                token.replace(TOKEN_PREFIX, "")
+            else
+                null
 
     fun generateToken(email: String, type: String, secret: Key, exp: Long, role: Role): String {
 
