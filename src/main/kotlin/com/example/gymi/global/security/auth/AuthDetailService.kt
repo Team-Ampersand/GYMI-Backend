@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service
 
 @Service
 class AuthDetailService(
-
         private val userRepository: UserRepository
 ) : UserDetailsService {
 
