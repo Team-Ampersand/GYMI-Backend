@@ -18,7 +18,6 @@ import org.springframework.web.cors.CorsUtils
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-
         private val tokenProvider: TokenProvider,
         private val jwtExceptionFilter: JwtExceptionFilter,
         private val jwtRequestFilter: JwtRequestFilter
@@ -26,7 +25,6 @@ class SecurityConfig(
 
     @Bean
     fun filterChain(http: HttpSecurity) : SecurityFilterChain {
-
         return http
                 .cors().and()
                 .csrf().disable()

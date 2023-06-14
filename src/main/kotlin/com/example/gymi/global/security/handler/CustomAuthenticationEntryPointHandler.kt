@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 class CustomAuthenticationEntryPointHandler : AuthenticationEntryPoint {
-
     private val log = LoggerFactory.getLogger(this::class.simpleName)
 
     @Throws(IOException::class, ServletException::class)

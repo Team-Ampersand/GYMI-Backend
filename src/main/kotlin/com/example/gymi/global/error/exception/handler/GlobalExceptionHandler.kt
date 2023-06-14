@@ -12,12 +12,10 @@ import javax.servlet.http.HttpServletRequest
 
 @RestControllerAdvice
 class GlobalExceptionHandler {
-
     private val log = LoggerFactory.getLogger(this.javaClass.simpleName)
 
     @ExceptionHandler(BasicException::class)
     fun globalExceptionHandler(request: HttpServletRequest, ex: BasicException): ResponseEntity<ErrorResponse> {
-
         log.error(ex.errorCode.message)
 
         log.error(request.requestURI)

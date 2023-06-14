@@ -46,18 +46,15 @@ class TokenProvider(
             generateToken(email, REFRESH_TYPE, jwtProperties.refreshSecret, tokenTimeProperties.refreshTime, role)
 
     fun resolveToken(req: HttpServletRequest): String? {
-
         val token = req.getHeader("Authorization") ?: return null
         return parseToken(token)
     }
 
     fun exactEmailFromRefreshToken(refresh: String): String {
-
         return getTokenSubject(refresh, jwtProperties.refreshSecret)
     }
 
     fun exactRoleFromRefreshToken(refresh: String): Role {
-
         val authority = getTokenBody(refresh, jwtProperties.refreshSecret)
                 .get(AUTHORITY, String::class.java)
 
@@ -74,7 +71,6 @@ class TokenProvider(
             getTokenSubject(refresh, jwtProperties.refreshSecret)
 
     fun authentication(token: String): Authentication {
-
         val userDetails = authDetailService.loadUserByUsername(getTokenSubject(token, jwtProperties.accessSecret))
         return UsernamePasswordAuthenticationToken(userDetails, "", userDetails.authorities)
     }
@@ -86,7 +82,6 @@ class TokenProvider(
                 null
 
     fun generateToken(email: String, type: String, secret: Key, exp: Long, role: Role): String {
-
         val claims = Jwts.claims().setSubject(email)
         claims["type"] = type
         claims[AUTHORITY] = role
@@ -100,9 +95,7 @@ class TokenProvider(
     }
 
     private fun getTokenBody(token: String, secret: Key): Claims {
-
         return try {
-
             Jwts.parserBuilder()
                     .setSigningKey(secret)
                     .build()

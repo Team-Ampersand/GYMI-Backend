@@ -9,7 +9,6 @@ import javax.persistence.*
 @Entity
 @DynamicUpdate
 class User(
-
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
