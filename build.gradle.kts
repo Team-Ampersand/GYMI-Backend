@@ -43,6 +43,9 @@ dependencies {
 
     // gauth
     implementation("com.github.GSM-MSG:GAuth-SDK-Java:v2.0.0")
+
+    // redis
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
 }
 
 tasks.withType<KotlinCompile> {
