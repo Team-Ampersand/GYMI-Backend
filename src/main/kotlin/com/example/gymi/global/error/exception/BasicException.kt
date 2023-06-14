@@ -1,6 +1,5 @@
 package com.example.gymi.global.error.exception
 
-class BasicException(
-
+open class BasicException(
         val errorCode: ErrorCode
 ) : RuntimeException()
