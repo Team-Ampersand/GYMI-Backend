@@ -27,9 +27,9 @@ class JwtRequestFilter(
             SecurityContextHolder.getContext().authentication = authentication
 
             log.info("current user email = ${authentication.name}")
-
-            filterChain.doFilter(request, response)
         }
+
+        filterChain.doFilter(request, response)
     }
 
 
