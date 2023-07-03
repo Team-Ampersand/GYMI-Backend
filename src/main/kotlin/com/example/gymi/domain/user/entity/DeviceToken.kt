@@ -9,14 +9,14 @@ import javax.persistence.*
 @Entity
 @DynamicUpdate
 class DeviceToken (
-        @Id
-        val userId: UUID,
+    @Id
+    val userId: UUID,
 
-        @MapsId
-        @ManyToOne(fetch = FetchType.LAZY)
-        @OnDelete(action = OnDeleteAction.CASCADE)
-        @JoinColumn(name = "user_id", columnDefinition = "BINARY(16)")
-        val user: User,
+    @MapsId
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_id", columnDefinition = "BINARY(16)")
+    val user: User,
 
-        val token: String,
+    val token: String,
 )

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 class JwtRequestFilter(
-        private val tokenProvider: TokenProvider
+    private val tokenProvider: TokenProvider
 ) : OncePerRequestFilter() {
 
     private val log = LoggerFactory.getLogger(this::class.simpleName)
@@ -27,9 +27,9 @@ class JwtRequestFilter(
             SecurityContextHolder.getContext().authentication = authentication
 
             log.info("current user email = ${authentication.name}")
-
-            filterChain.doFilter(request, response)
         }
+
+        filterChain.doFilter(request, response)
     }
 
 

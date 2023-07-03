@@ -1,8 +1,8 @@
 package com.example.gymi.global.error.exception
 
 enum class ErrorCode(
-        val status: Int,
-        val message: String
+    val status: Int,
+    val message: String
 ) {
 
     USER_NOT_FOUND(404, "유저를 찾을 수 없습니다."),

@@ -12,6 +12,7 @@ import java.util.*
 interface AuthConverter {
 
     fun toDto(signInRequestDto: SignInRequestDto): SignInDto
+
     fun toDto(deviceTokenRequest: DeviceTokenRequest): DeviceTokenDto
 
     fun toEntity(gAuthUserInfo: GAuthUserInfo): User
@@ -19,6 +20,7 @@ interface AuthConverter {
     fun toAdminEntity(gAuthUserInfo: GAuthUserInfo): User
 
     fun toEntity(userInfo: User, refreshToken: String): RefreshToken
+
     fun toEntity(userId: UUID?, refreshToken: String): RefreshToken
 
 }
