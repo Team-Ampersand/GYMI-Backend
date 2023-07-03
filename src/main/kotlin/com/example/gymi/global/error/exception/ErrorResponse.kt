@@ -1,6 +1,6 @@
 package com.example.gymi.global.error.exception
 
 data class ErrorResponse(
-        val status: Int,
-        val message: String
+    val status: Int,
+    val message: String
 )

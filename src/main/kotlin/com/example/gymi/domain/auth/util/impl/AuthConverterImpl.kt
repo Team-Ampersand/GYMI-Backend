@@ -15,47 +15,47 @@ import java.util.*
 @Component
 class AuthConverterImpl : AuthConverter {
     override fun toDto(signInRequestDto: SignInRequestDto): SignInDto =
-            SignInDto(
-                    code = signInRequestDto.code,
-                    token = signInRequestDto.token
-            )
+        SignInDto(
+                code = signInRequestDto.code,
+                token = signInRequestDto.token
+        )
 
     override fun toDto(deviceTokenRequest: DeviceTokenRequest): DeviceTokenDto =
-            DeviceTokenDto(deviceTokenRequest.token)
+        DeviceTokenDto(deviceTokenRequest.token)
 
 
     override fun toEntity(gAuthUserInfo: GAuthUserInfo): User =
-            User(
-                    id = UUID.randomUUID(),
-                    email = gAuthUserInfo.email,
-                    nickname = gAuthUserInfo.name,
-                    grade = gAuthUserInfo.grade,
-                    classNum = gAuthUserInfo.classNum,
-                    number = gAuthUserInfo.num,
-                    roles = mutableListOf(Role.ROLE_STUDENT)
-            )
+        User(
+            id = UUID.randomUUID(),
+            email = gAuthUserInfo.email,
+            nickname = gAuthUserInfo.name,
+            grade = gAuthUserInfo.grade,
+            classNum = gAuthUserInfo.classNum,
+            number = gAuthUserInfo.num,
+            roles = mutableListOf(Role.ROLE_STUDENT)
+        )
 
     override fun toAdminEntity(gAuthUserInfo: GAuthUserInfo): User =
-            User(
-                    id = UUID.randomUUID(),
-                    email = gAuthUserInfo.email,
-                    nickname = gAuthUserInfo.name,
-                    grade = 0,
-                    classNum = 0,
-                    number = 0,
-                    roles = mutableListOf(Role.ROLE_ADMIN)
-            )
+        User(
+            id = UUID.randomUUID(),
+            email = gAuthUserInfo.email,
+            nickname = gAuthUserInfo.name,
+            grade = 0,
+            classNum = 0,
+            number = 0,
+            roles = mutableListOf(Role.ROLE_ADMIN)
+        )
 
     override fun toEntity(userInfo: User, refreshToken: String): RefreshToken =
-            RefreshToken(
-                    userId = userInfo.id,
-                    token = refreshToken
-            )
+        RefreshToken(
+            userId = userInfo.id,
+            token = refreshToken
+        )
 
 
     override fun toEntity(userId: UUID?, refreshToken: String): RefreshToken =
-            RefreshToken(
-                    userId = userId,
-                    token = refreshToken
-            )
+        RefreshToken(
+            userId = userId,
+            token = refreshToken
+        )
 }

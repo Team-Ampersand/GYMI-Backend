@@ -8,9 +8,9 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 
 @Configuration
 class RedisConfig(
-        private val redisProperties: RedisProperties,
+    private val redisProperties: RedisProperties,
 ) {
     @Bean
     fun redisConnectionFactory(): RedisConnectionFactory =
-            LettuceConnectionFactory(redisProperties.host, redisProperties.port)
+        LettuceConnectionFactory(redisProperties.host, redisProperties.port)
 }

@@ -12,12 +12,12 @@ import javax.validation.Valid
 
 @RequestController("/auth")
 class AuthController(
-        private val signInService: SignInService,
-        private val authConverter: AuthConverter
+    private val signInService: SignInService,
+    private val authConverter: AuthConverter
 ) {
 
     @PostMapping
     fun signIn(@RequestBody @Valid signInRequestDto: SignInRequestDto): ResponseEntity<SignInResponseDto> =
-            authConverter.toDto(signInRequestDto)
-                    .let { ResponseEntity.ok(signInService.execute(it)) }
+        authConverter.toDto(signInRequestDto)
+            .let { ResponseEntity.ok(signInService.execute(it)) }
 }

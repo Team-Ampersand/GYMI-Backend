@@ -17,20 +17,20 @@ import java.time.ZonedDateTime
 
 @Service
 class SignInServiceImpl(
-        private val gAuthProperties: GAuthProperties,
-        private val userRepository: UserRepository,
-        private val tokenProvider: TokenProvider,
-        private val gAuth: GAuth,
-        private val authUtil: AuthUtil,
+    private val gAuthProperties: GAuthProperties,
+    private val userRepository: UserRepository,
+    private val tokenProvider: TokenProvider,
+    private val gAuth: GAuth,
+    private val authUtil: AuthUtil,
 ) : SignInService {
 
 
     override fun execute(signInDto: SignInDto): SignInResponseDto {
         val gAuthToken: GAuthToken = gAuth.generateToken(
-                signInDto.code,
-                gAuthProperties.clientId,
-                gAuthProperties.clientSecret,
-                gAuthProperties.redirectUri
+            signInDto.code,
+            gAuthProperties.clientId,
+            gAuthProperties.clientSecret,
+            gAuthProperties.redirectUri
         )
         val gAuthUserInfo: GAuthUserInfo = gAuth.getUserInfo(gAuthToken.accessToken)
         val role = getRoleByGauthInfo(gAuthUserInfo.role, gAuthUserInfo.email)
@@ -48,10 +48,10 @@ class SignInServiceImpl(
         }
 
         return SignInResponseDto(
-                accessToken = accessToken,
-                refreshToken = refreshToken,
-                accessExp = accessExp,
-                refreshExp = refreshExp
+            accessToken = accessToken,
+            refreshToken = refreshToken,
+            accessExp = accessExp,
+            refreshExp = refreshExp
         )
     }
 

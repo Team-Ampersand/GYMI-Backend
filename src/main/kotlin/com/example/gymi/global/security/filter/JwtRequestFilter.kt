@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse
 
 @Component
 class JwtRequestFilter(
-        private val tokenProvider: TokenProvider
+    private val tokenProvider: TokenProvider
 ) : OncePerRequestFilter() {
 
     private val log = LoggerFactory.getLogger(this::class.simpleName)

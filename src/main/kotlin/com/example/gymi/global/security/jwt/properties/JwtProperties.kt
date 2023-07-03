@@ -8,15 +8,14 @@ import java.security.Key
 @ConstructorBinding
 @ConfigurationProperties(prefix = "jwt")
 class JwtProperties(
-        accessSecret: String,
-        refreshSecret: String
+    accessSecret: String,
+    refreshSecret: String
 ) {
 
     val accessSecret: Key
     val refreshSecret: Key
 
     init {
-
         this.accessSecret = Keys.hmacShaKeyFor(accessSecret.toByteArray())
         this.refreshSecret = Keys.hmacShaKeyFor(refreshSecret.toByteArray())
     }

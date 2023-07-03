@@ -18,37 +18,37 @@ import org.springframework.web.cors.CorsUtils
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-        private val tokenProvider: TokenProvider,
-        private val jwtExceptionFilter: JwtExceptionFilter,
-        private val jwtRequestFilter: JwtRequestFilter
+    private val tokenProvider: TokenProvider,
+    private val jwtExceptionFilter: JwtExceptionFilter,
+    private val jwtRequestFilter: JwtRequestFilter
 ) {
 
     @Bean
     fun filterChain(http: HttpSecurity) : SecurityFilterChain {
         return http
-                .cors().and()
-                .csrf().disable()
-                .formLogin().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+            .cors().and()
+            .csrf().disable()
+            .formLogin().disable()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
 
-                .authorizeRequests()
-                .requestMatchers(RequestMatcher { request ->
-                    CorsUtils.isPreFlightRequest(request)
-                }).permitAll()
+            .authorizeRequests()
+            .requestMatchers(RequestMatcher { request ->
+                CorsUtils.isPreFlightRequest(request)
+            }).permitAll()
 
-                .antMatchers("/auth/**").permitAll()
+            .antMatchers("/auth/**").permitAll()
 
-                .anyRequest().denyAll()
-                .and()
-                .exceptionHandling()
-                .accessDeniedHandler(CustomAccessDeniedHandler())
-                .authenticationEntryPoint(CustomAuthenticationEntryPointHandler())
+            .anyRequest().denyAll()
+            .and()
+            .exceptionHandling()
+            .accessDeniedHandler(CustomAccessDeniedHandler())
+            .authenticationEntryPoint(CustomAuthenticationEntryPointHandler())
 
-                .and()
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter::class.java)
-                .addFilterBefore(jwtExceptionFilter, JwtRequestFilter::class.java)
+            .and()
+            .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterBefore(jwtExceptionFilter, JwtRequestFilter::class.java)
 
-                .build()
+            .build()
     }
 }
