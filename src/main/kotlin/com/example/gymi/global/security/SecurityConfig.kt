@@ -37,6 +37,8 @@ class SecurityConfig(
                     CorsUtils.isPreFlightRequest(request)
                 }).permitAll()
 
+                .antMatchers("/auth/**").permitAll()
+
                 .anyRequest().denyAll()
                 .and()
                 .exceptionHandling()
