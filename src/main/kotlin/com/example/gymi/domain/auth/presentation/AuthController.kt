@@ -2,10 +2,12 @@ package com.example.gymi.domain.auth.presentation
 
 import com.example.gymi.domain.auth.presentation.data.request.SignInRequestDto
 import com.example.gymi.domain.auth.presentation.data.response.SignInResponseDto
+import com.example.gymi.domain.auth.service.LogoutService
 import com.example.gymi.domain.auth.service.SignInService
 import com.example.gymi.domain.auth.util.AuthConverter
 import com.example.gymi.global.annotation.RequestController
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import javax.validation.Valid
@@ -13,6 +15,7 @@ import javax.validation.Valid
 @RequestController("/auth")
 class AuthController(
     private val signInService: SignInService,
+    private val logoutService: LogoutService,
     private val authConverter: AuthConverter
 ) {
 
@@ -20,4 +23,10 @@ class AuthController(
     fun signIn(@RequestBody @Valid signInRequestDto: SignInRequestDto): ResponseEntity<SignInResponseDto> =
         authConverter.toDto(signInRequestDto)
             .let { ResponseEntity.ok(signInService.execute(it)) }
+
+    @DeleteMapping
+    fun logout(): ResponseEntity<Void> {
+        logoutService.execute()
+        return ResponseEntity.noContent().build()
+    }
 }
