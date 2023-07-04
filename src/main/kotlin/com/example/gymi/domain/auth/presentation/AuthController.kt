@@ -25,8 +25,7 @@ class AuthController(
             .let { ResponseEntity.ok(signInService.execute(it)) }
 
     @DeleteMapping
-    fun logout(): ResponseEntity<Void> {
+    fun logout(): ResponseEntity<Void> =
         logoutService.execute()
-        return ResponseEntity.noContent().build()
-    }
+            .let { ResponseEntity.noContent().build() }
 }
