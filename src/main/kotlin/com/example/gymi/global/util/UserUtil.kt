@@ -22,8 +22,6 @@ class UserUtil(
 
     fun fetchUserEmail(): String {
         val principal = SecurityContextHolder.getContext().authentication.principal
-        println(principal)
-        println(principal is UserDetails)
 
         val email =
             if (principal is UserDetails) {
