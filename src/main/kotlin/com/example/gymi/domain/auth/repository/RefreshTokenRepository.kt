@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository
 import java.util.*
 
 interface RefreshTokenRepository : CrudRepository<RefreshToken, UUID> {
+    fun findByUserId(userId: UUID): RefreshToken?
 }
