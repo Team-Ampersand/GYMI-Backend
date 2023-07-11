@@ -6,4 +6,6 @@ import java.util.*
 
 interface RefreshTokenRepository : CrudRepository<RefreshToken, UUID> {
     fun findByUserId(userId: UUID): RefreshToken?
+
+    fun findByToken(token: String): RefreshToken?
 }
