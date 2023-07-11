@@ -13,9 +13,11 @@ import gauth.GAuth
 import gauth.GAuthToken
 import gauth.GAuthUserInfo
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.time.ZonedDateTime
 
 @Service
+@Transactional(rollbackFor = [Exception::class])
 class SignInServiceImpl(
     private val gAuthProperties: GAuthProperties,
     private val userRepository: UserRepository,
