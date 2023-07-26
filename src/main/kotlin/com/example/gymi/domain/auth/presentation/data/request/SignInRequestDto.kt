@@ -5,5 +5,5 @@ import javax.validation.constraints.NotBlank
 data class SignInRequestDto(
     @field:NotBlank
     val code: String,
-    val token: String?
+    val deviceToken: String?
 )

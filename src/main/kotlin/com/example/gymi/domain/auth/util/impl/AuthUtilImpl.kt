@@ -18,20 +18,20 @@ class AuthUtilImpl(
     private val userRepository: UserRepository,
     private val deviceTokenRepository: DeviceTokenRepository
 ) : AuthUtil {
-    override fun saveNewUser(gAuthUserInfo: GAuthUserInfo, refreshToken: String, token: String?) {
+    override fun saveNewUser(gAuthUserInfo: GAuthUserInfo, refreshToken: String, deviceToken: String?) {
         val signInUserInfo: User = authConverter.toEntity(gAuthUserInfo)
             .let { userRepository.save(it) }
-        saveNewRefreshToken(signInUserInfo, refreshToken, token)
+        saveNewRefreshToken(signInUserInfo, refreshToken, deviceToken)
     }
 
-    override fun saveNewAdmin(gAuthUserInfo: GAuthUserInfo, refreshToken: String, token: String?) {
+    override fun saveNewAdmin(gAuthUserInfo: GAuthUserInfo, refreshToken: String, deviceToken: String?) {
         val signInAdminInfo: User = authConverter.toAdminEntity(gAuthUserInfo)
             .let { userRepository.save(it) }
-        saveNewRefreshToken(signInAdminInfo, refreshToken, token)
+        saveNewRefreshToken(signInAdminInfo, refreshToken, deviceToken)
     }
 
-    override fun saveNewRefreshToken(userInfo: User, refreshToken: String, token: String?): RefreshToken {
-        deviceTokenRepository.save(DeviceToken(userInfo.id, userInfo, token ?: ""))
+    override fun saveNewRefreshToken(userInfo: User, refreshToken: String, deviceToken: String?): RefreshToken {
+        deviceTokenRepository.save(DeviceToken(userInfo.id, userInfo, deviceToken ?: ""))
         return authConverter.toEntity(userInfo, refreshToken)
             .let { refreshTokenRepository.save(it) }
     }

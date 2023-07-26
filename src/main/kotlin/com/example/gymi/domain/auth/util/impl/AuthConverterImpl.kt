@@ -17,11 +17,11 @@ class AuthConverterImpl : AuthConverter {
     override fun toDto(signInRequestDto: SignInRequestDto): SignInDto =
         SignInDto(
                 code = signInRequestDto.code,
-                token = signInRequestDto.token
+                deviceToken = signInRequestDto.deviceToken
         )
 
     override fun toDto(deviceTokenRequest: DeviceTokenRequest): DeviceTokenDto =
-        DeviceTokenDto(deviceTokenRequest.token)
+        DeviceTokenDto(deviceTokenRequest.deviceToken)
 
 
     override fun toEntity(gAuthUserInfo: GAuthUserInfo): User =

@@ -51,7 +51,7 @@ class GetNewRefreshTokenServiceImpl(
         refreshTokenRepository.save(newRefreshTokenEntity)
         val user = userRepository.findByEmail(email)
             ?: throw UserNotFoundException()
-        deviceTokenRepository.save(DeviceToken(user.id, user, deviceTokenDto.token?:""))
+        deviceTokenRepository.save(DeviceToken(user.id, user, deviceTokenDto.deviceToken?:""))
 
         return NewRefreshTokenResponseDto(
             accessToken = newAccessToken,

@@ -36,7 +36,7 @@ class SignInServiceImpl(
         )
         val gAuthUserInfo: GAuthUserInfo = gAuth.getUserInfo(gAuthToken.accessToken)
         val role = getRoleByGauthInfo(gAuthUserInfo.role, gAuthUserInfo.email)
-        val token = signInDto.token
+        val deviceToken = signInDto.deviceToken
 
         val accessToken: String = tokenProvider.generateAccessToken(gAuthUserInfo.email, role)
         val refreshToken: String = tokenProvider.generateRefreshToken(gAuthUserInfo.email, role)
@@ -44,9 +44,9 @@ class SignInServiceImpl(
         val refreshExp: ZonedDateTime = tokenProvider.refreshExpiredTime
 
         if(role == Role.ROLE_ADMIN) {
-            createAdminOrRefreshToken(gAuthUserInfo, refreshToken, token)
+            createAdminOrRefreshToken(gAuthUserInfo, refreshToken, deviceToken)
         } else {
-            createUserOrRefreshToken(gAuthUserInfo, refreshToken, token)
+            createUserOrRefreshToken(gAuthUserInfo, refreshToken, deviceToken)
         }
 
         return SignInResponseDto(
@@ -69,21 +69,21 @@ class SignInServiceImpl(
         return Role.ROLE_STUDENT
     }
 
-    private fun createUserOrRefreshToken(gAuthUserInfo: GAuthUserInfo, refreshToken: String, token: String?) {
+    private fun createUserOrRefreshToken(gAuthUserInfo: GAuthUserInfo, refreshToken: String, deviceToken: String?) {
         val userInfo = userRepository.findByEmail(gAuthUserInfo.email)
         if (userInfo == null) {
-            authUtil.saveNewUser(gAuthUserInfo, refreshToken, token)
+            authUtil.saveNewUser(gAuthUserInfo, refreshToken, deviceToken)
         } else {
-            authUtil.saveNewRefreshToken(userInfo, refreshToken, token)
+            authUtil.saveNewRefreshToken(userInfo, refreshToken, deviceToken)
         }
     }
 
-    private fun createAdminOrRefreshToken(gAuthUserInfo: GAuthUserInfo, refreshToken: String, token: String?) {
+    private fun createAdminOrRefreshToken(gAuthUserInfo: GAuthUserInfo, refreshToken: String, deviceToken: String?) {
         val adminInfo = userRepository.findByEmail(gAuthUserInfo.email)
         if (adminInfo == null) {
-            authUtil.saveNewAdmin(gAuthUserInfo, refreshToken, token)
+            authUtil.saveNewAdmin(gAuthUserInfo, refreshToken, deviceToken)
         } else {
-            authUtil.saveNewRefreshToken(adminInfo, refreshToken, token)
+            authUtil.saveNewRefreshToken(adminInfo, refreshToken, deviceToken)
         }
     }
 

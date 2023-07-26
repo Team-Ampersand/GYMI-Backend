@@ -5,9 +5,9 @@ import com.example.gymi.domain.user.entity.User
 import gauth.GAuthUserInfo
 
 interface AuthUtil {
-    fun saveNewUser(gAuthUserInfo: GAuthUserInfo, refreshToken: String, token: String?)
+    fun saveNewUser(gAuthUserInfo: GAuthUserInfo, refreshToken: String, deviceToken: String?)
 
-    fun saveNewAdmin(gAuthUserInfo: GAuthUserInfo, refreshToken: String, token: String?)
+    fun saveNewAdmin(gAuthUserInfo: GAuthUserInfo, refreshToken: String, deviceToken: String?)
 
-    fun saveNewRefreshToken(userInfo: User, refreshToken: String, token: String?): RefreshToken
+    fun saveNewRefreshToken(userInfo: User, refreshToken: String, deviceToken: String?): RefreshToken
 }
