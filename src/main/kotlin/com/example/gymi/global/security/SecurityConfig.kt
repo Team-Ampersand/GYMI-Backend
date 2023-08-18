@@ -7,7 +7,6 @@ import com.example.gymi.global.security.handler.CustomAuthenticationEntryPointHa
 import com.example.gymi.global.security.jwt.TokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -39,8 +38,6 @@ class SecurityConfig(
             }).permitAll()
 
             .antMatchers("/auth/**").permitAll()
-
-            .antMatchers(HttpMethod.POST, "/notice").hasAuthority("ROLE_ADMIN")
 
             .anyRequest().denyAll()
             .and()
