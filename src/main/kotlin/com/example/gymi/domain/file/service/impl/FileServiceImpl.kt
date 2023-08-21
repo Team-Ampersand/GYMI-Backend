@@ -67,7 +67,7 @@ class FileServiceImpl(
         return amazonS3.getUrl(bucket, fileName).toString()
     }
 
-    fun deleteFile(fileName: String) {
+    override fun deleteFile(fileName: String) {
         amazonS3.deleteObject(DeleteObjectRequest(bucket, fileName))
     }
 }
