@@ -20,4 +20,7 @@ enum class ErrorCode(
     INVALID_FORMAT_FILE(400,"잘못된 형식의 파일입니다."),
     FILE_UPLOAD_FAIL(500,"파일 업로드에 실패했습니다."),
 
+    //NOTICE
+    NOTICE_NOT_FOUND(404, "해당 공지 글을 찾을 수 없습니다.")
+
 }

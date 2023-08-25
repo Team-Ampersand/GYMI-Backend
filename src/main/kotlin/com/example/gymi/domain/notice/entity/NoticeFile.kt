@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
-@Table(name = "file")
+@Table(name = "notice_file")
 class NoticeFile(
 
     @Id
