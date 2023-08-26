@@ -31,8 +31,8 @@ class EditNoticeServiceImpl(
 
         val noticeFileInfo: List<NoticeFile> = noticeFileRepository.findAllByNoticeId(noticeInfo.id)
 
-        toDto(editNoticeRequestDto)
-            .let { noticeInfo.editNotice(title = it.title, content = it.content) }
+        var editNoticeDto = editNoticeRequestDto.toDto()
+        noticeInfo.editNotice(title = editNoticeDto.title, content = editNoticeDto.content)
 
         if (multipartFile != null) {
             val editFileUrls: List<String> = fileService.execute(multipartFile)
@@ -52,10 +52,10 @@ class EditNoticeServiceImpl(
         return noticeInfo
     }
 
-    private fun toDto(editNoticeRequestDto: EditNoticeRequestDto): EditNoticeDto =
+    private fun EditNoticeRequestDto.toDto(): EditNoticeDto =
         EditNoticeDto(
-            title = editNoticeRequestDto.title,
-            content = editNoticeRequestDto.content
+            title = this.title,
+            content = this.content
         )
 
     private fun toEntity(notice: Notice, uploadFileUrl: String): NoticeFile =
