@@ -2,6 +2,7 @@ package com.example.gymi.domain.notice.entity
 
 import com.example.gymi.domain.user.entity.User
 import com.example.gymi.global.entity.BaseTimeEntity
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -25,4 +26,10 @@ class Notice(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     val user: User,
-) : BaseTimeEntity()
+) : BaseTimeEntity() {
+    fun editNotice(title: String, content: String) {
+        this.title = title
+        this.content = content
+        this.modifiedDate = LocalDateTime.now()
+    }
+}

@@ -1,12 +1,15 @@
 package com.example.gymi.domain.notice.presentation
 
 import com.example.gymi.domain.notice.presentation.data.request.CreateNoticeRequestDto
+import com.example.gymi.domain.notice.presentation.data.request.EditNoticeRequestDto
 import com.example.gymi.domain.notice.service.CreateNoticeService
 import com.example.gymi.domain.notice.service.DeleteNoticeService
+import com.example.gymi.domain.notice.service.EditNoticeService
 import com.example.gymi.global.annotation.RequestController
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestPart
@@ -18,7 +21,8 @@ import javax.validation.Valid
 @RequestController("/notice")
 class NoticeController(
     private val createNoticeService: CreateNoticeService,
-    private val deleteNoticeService: DeleteNoticeService
+    private val deleteNoticeService: DeleteNoticeService,
+    private val editNoticeService: EditNoticeService
 ) {
 
     @PostMapping
@@ -33,4 +37,13 @@ class NoticeController(
     fun delete(@PathVariable id: Long): ResponseEntity<Void> =
         deleteNoticeService.execute(id)
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
+
+    @PatchMapping("/{id}")
+    fun edit(
+        @PathVariable id: Long,
+        @Valid @RequestPart(value = "notice") editNoticeRequestDto: EditNoticeRequestDto,
+        @RequestPart(value = "file", required = false) multipartFile: List<MultipartFile>?,
+    ): ResponseEntity<Void> =
+        editNoticeService.execute(id, editNoticeRequestDto, multipartFile)
+            .let { ResponseEntity.status(HttpStatus.OK).build() }
 }

@@ -6,18 +6,24 @@ import javax.persistence.*
 @Entity
 @Table(name = "notice_file")
 class NoticeFile(
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "file_id")
-    val id: Long = 0,
-
-    @Column(name = "file_url")
-    val url: String,
+    url: String,
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "notice_id", nullable = false)
     val notice: Notice
+
 ) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "file_id")
+    val id: Long = 0
+
+    @Column(name = "file_url")
+    var url = url
+        private set
+
+    fun editNoticeFile(url: String) {
+        this.url = url
+    }
 }
