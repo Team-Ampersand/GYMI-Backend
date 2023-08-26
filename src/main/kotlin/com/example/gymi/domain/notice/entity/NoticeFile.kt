@@ -13,11 +13,14 @@ class NoticeFile(
     val id: Long = 0,
 
     @Column(name = "file_url")
-    val url: String,
+    var url: String,
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "notice_id", nullable = false)
     val notice: Notice
 ) {
+    fun editNoticeFile(url: String) {
+        this.url = url
+    }
 }
