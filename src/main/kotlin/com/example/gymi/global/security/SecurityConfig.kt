@@ -43,6 +43,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.POST, "/notice").hasAuthority("ROLE_ADMIN")
             .antMatchers(HttpMethod.DELETE, "/notice/{id}").hasAuthority("ROLE_ADMIN")
             .antMatchers(HttpMethod.PATCH, "/notice/{id}").hasAuthority("ROLE_ADMIN")
+            .antMatchers(HttpMethod.GET, "/notice").authenticated()
 
             .anyRequest().denyAll()
             .and()
