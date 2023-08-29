@@ -53,5 +53,6 @@ class NoticeController(
 
     @GetMapping
     fun findList(): ResponseEntity<ListNoticeResponseDto> =
-        ResponseEntity.status(HttpStatus.OK).body(listNoticeService.execute())
+        listNoticeService.execute()
+            .let{ ResponseEntity.status(HttpStatus.OK).body(it) }
 }
