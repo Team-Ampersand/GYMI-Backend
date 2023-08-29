@@ -11,13 +11,11 @@ data class NoticeResponseDto(
     val role: Role,
     val createdDate: LocalDateTime
 ) {
-    companion object {
-        fun of(notice: Notice) = NoticeResponseDto(
-            id = notice.id,
-            title = notice.title,
-            content = notice.content,
-            role = notice.user.roles[0],
-            createdDate = notice.createdDate
-        )
-    }
+    constructor(notice: Notice) : this(
+        id = notice.id,
+        title = notice.title,
+        content = notice.content,
+        role = notice.user.roles[0],
+        createdDate = notice.createdDate
+    )
 }
