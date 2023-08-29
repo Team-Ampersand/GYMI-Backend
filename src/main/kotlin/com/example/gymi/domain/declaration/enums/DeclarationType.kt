@@ -6,6 +6,6 @@ enum class DeclarationType(private val description: String) {
     SEAT("자리 위반"),
     UNIFORM("복장 위반"),
     FOOD("음식물 반입"),
-    Dissension("불화"),
+    DISSENSION("불화"),
     ETC("기타")
 }
