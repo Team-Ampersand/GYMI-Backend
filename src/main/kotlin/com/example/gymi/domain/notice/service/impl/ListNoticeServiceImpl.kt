@@ -15,6 +15,6 @@ class ListNoticeServiceImpl(
 
     override fun execute(): ListNoticeResponseDto = ListNoticeResponseDto(
         noticeList = noticeRepository.findAllByOrderByCreatedDateDesc()
-            .map { NoticeResponseDto.of(it) }
+            .map { NoticeResponseDto(it) }
     )
 }
