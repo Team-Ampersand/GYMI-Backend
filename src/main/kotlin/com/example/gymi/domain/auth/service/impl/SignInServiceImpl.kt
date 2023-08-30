@@ -43,11 +43,16 @@ class SignInServiceImpl(
         val accessExp: ZonedDateTime = tokenProvider.accessExpiredTime
         val refreshExp: ZonedDateTime = tokenProvider.refreshExpiredTime
 
-        if(role == Role.ROLE_ADMIN) {
-            createAdminOrRefreshToken(gAuthUserInfo, refreshToken, deviceToken)
-        } else {
-            createUserOrRefreshToken(gAuthUserInfo, refreshToken, deviceToken)
+        when (role) {
+            Role.ROLE_ADMIN -> {
+                createAdminOrRefreshToken(gAuthUserInfo, refreshToken, deviceToken)
+            }
+            Role.ROLE_TEACHER -> {
+                createTeacherOrRefreshToken(gAuthUserInfo, refreshToken, deviceToken)
+            }
+            else -> createUserOrRefreshToken(gAuthUserInfo, refreshToken, deviceToken)
         }
+
 
         return SignInResponseDto(
             accessToken = accessToken,
@@ -61,11 +66,10 @@ class SignInServiceImpl(
         val user = userRepository.findByEmail(email) ?:
         return when (role) {
             "ROLE_STUDENT" -> Role.ROLE_STUDENT
-            "ROLE_TEACHER" -> Role.ROLE_ADMIN
+            "ROLE_ADMIN" -> Role.ROLE_ADMIN
+            "ROLE_TEACHER" -> Role.ROLE_TEACHER
             else -> throw RoleNotExistException()
         }
-        if(user.roles.contains(Role.ROLE_ADMIN))
-            return Role.ROLE_ADMIN
         return Role.ROLE_STUDENT
     }
 
@@ -84,6 +88,15 @@ class SignInServiceImpl(
             authUtil.saveNewAdmin(gAuthUserInfo, refreshToken, deviceToken)
         } else {
             authUtil.saveNewRefreshToken(adminInfo, refreshToken, deviceToken)
+        }
+    }
+
+    private fun createTeacherOrRefreshToken(gAuthUserInfo: GAuthUserInfo, refreshToken: String, deviceToken: String?) {
+        val teacherInfo = userRepository.findByEmail(gAuthUserInfo.email)
+        if (teacherInfo == null) {
+            authUtil.saveNewTeacher(gAuthUserInfo, refreshToken, deviceToken)
+        } else {
+            authUtil.saveNewRefreshToken(teacherInfo, refreshToken, deviceToken)
         }
     }
 
