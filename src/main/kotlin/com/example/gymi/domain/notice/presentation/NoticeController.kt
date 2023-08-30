@@ -2,11 +2,9 @@ package com.example.gymi.domain.notice.presentation
 
 import com.example.gymi.domain.notice.presentation.data.request.CreateNoticeRequestDto
 import com.example.gymi.domain.notice.presentation.data.request.EditNoticeRequestDto
+import com.example.gymi.domain.notice.presentation.data.response.DetailNoticeResponseDto
 import com.example.gymi.domain.notice.presentation.data.response.ListNoticeResponseDto
-import com.example.gymi.domain.notice.service.CreateNoticeService
-import com.example.gymi.domain.notice.service.DeleteNoticeService
-import com.example.gymi.domain.notice.service.EditNoticeService
-import com.example.gymi.domain.notice.service.ListNoticeService
+import com.example.gymi.domain.notice.service.*
 import com.example.gymi.global.annotation.RequestController
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -26,7 +24,8 @@ class NoticeController(
     private val createNoticeService: CreateNoticeService,
     private val deleteNoticeService: DeleteNoticeService,
     private val editNoticeService: EditNoticeService,
-    private val listNoticeService: ListNoticeService
+    private val listNoticeService: ListNoticeService,
+    private val detailNoticeService: DetailNoticeService
 ) {
 
     @PostMapping
@@ -54,5 +53,10 @@ class NoticeController(
     @GetMapping
     fun findList(): ResponseEntity<ListNoticeResponseDto> =
         listNoticeService.execute()
+            .let{ ResponseEntity.status(HttpStatus.OK).body(it) }
+
+    @GetMapping("/{id}")
+    fun findDetail(@PathVariable id: Long): ResponseEntity<DetailNoticeResponseDto> =
+        detailNoticeService.execute(id)
             .let{ ResponseEntity.status(HttpStatus.OK).body(it) }
 }
