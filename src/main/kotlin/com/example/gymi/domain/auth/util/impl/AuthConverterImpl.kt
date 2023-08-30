@@ -46,6 +46,17 @@ class AuthConverterImpl : AuthConverter {
             roles = mutableListOf(Role.ROLE_ADMIN)
         )
 
+    override fun toTeacherEntity(gAuthUserInfo: GAuthUserInfo): User =
+        User(
+            id = UUID.randomUUID(),
+            email = gAuthUserInfo.email,
+            nickname = gAuthUserInfo.name,
+            grade = 0,
+            classNum = 0,
+            number = 0,
+            roles = mutableListOf(Role.ROLE_TEACHER)
+        )
+
     override fun toEntity(userInfo: User, refreshToken: String): RefreshToken =
         RefreshToken(
             userId = userInfo.id,
