@@ -9,5 +9,7 @@ interface AuthUtil {
 
     fun saveNewAdmin(gAuthUserInfo: GAuthUserInfo, refreshToken: String, deviceToken: String?)
 
+    fun saveNewTeacher(gAuthUserInfo: GAuthUserInfo, refreshToken: String, deviceToken: String?)
+
     fun saveNewRefreshToken(userInfo: User, refreshToken: String, deviceToken: String?): RefreshToken
 }

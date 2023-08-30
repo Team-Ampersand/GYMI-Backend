@@ -30,6 +30,12 @@ class AuthUtilImpl(
         saveNewRefreshToken(signInAdminInfo, refreshToken, deviceToken)
     }
 
+    override fun saveNewTeacher(gAuthUserInfo: GAuthUserInfo, refreshToken: String, deviceToken: String?) {
+        val signInTeacherInfo: User = authConverter.toTeacherEntity(gAuthUserInfo)
+            .let { userRepository.save(it) }
+        saveNewRefreshToken(signInTeacherInfo, refreshToken, deviceToken)
+    }
+
     override fun saveNewRefreshToken(userInfo: User, refreshToken: String, deviceToken: String?): RefreshToken {
         deviceTokenRepository.save(DeviceToken(userInfo.id, userInfo, deviceToken ?: ""))
         return authConverter.toEntity(userInfo, refreshToken)
