@@ -19,6 +19,8 @@ interface AuthConverter {
 
     fun toAdminEntity(gAuthUserInfo: GAuthUserInfo): User
 
+    fun toTeacherEntity(gAuthUserInfo: GAuthUserInfo): User
+
     fun toEntity(userInfo: User, refreshToken: String): RefreshToken
 
     fun toEntity(userId: UUID?, refreshToken: String): RefreshToken

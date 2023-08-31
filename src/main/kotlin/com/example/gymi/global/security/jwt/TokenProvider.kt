@@ -60,6 +60,7 @@ class TokenProvider(
         return when (authority) {
             "ROLE_STUDENT" -> Role.ROLE_STUDENT
             "ROLE_ADMIN" -> Role.ROLE_ADMIN
+            "ROLE_TEACHER" -> Role.ROLE_TEACHER
             else -> throw RoleNotExistException()
         }
 
