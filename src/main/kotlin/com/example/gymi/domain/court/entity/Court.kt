@@ -1,7 +1,6 @@
 package com.example.gymi.domain.court.entity
 
 import com.example.gymi.domain.court.enum.DayPeriod
-import com.example.gymi.domain.court.enum.Type
 import com.example.gymi.domain.court.enum.Week
 import javax.persistence.*
 
@@ -17,9 +16,8 @@ data class Court(
     @Column(length = 5)
     val maxCount: Int,
 
-    @Enumerated(EnumType.STRING)
     @Column(length = 15)
-    val type: Type,
+    val type: String,
 
     @Enumerated(EnumType.STRING)
     @Column(length = 10)
