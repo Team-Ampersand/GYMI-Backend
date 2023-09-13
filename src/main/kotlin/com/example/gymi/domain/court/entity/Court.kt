@@ -5,7 +5,7 @@ import com.example.gymi.domain.court.enum.Week
 import javax.persistence.*
 
 @Entity
-data class Court(
+class Court(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,

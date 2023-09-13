@@ -5,7 +5,7 @@ import com.example.gymi.domain.user.entity.User
 import javax.persistence.*
 
 @Entity
-data class Reservation(
+class Reservation(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
