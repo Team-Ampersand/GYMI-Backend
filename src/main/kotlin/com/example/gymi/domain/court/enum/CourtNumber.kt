@@ -1,4 +1,4 @@
-package com.example.gymi.domain.reservation.enum
+package com.example.gymi.domain.court.enum
 
 enum class CourtNumber(val value: String) {
     FIRST("1번코트"),
