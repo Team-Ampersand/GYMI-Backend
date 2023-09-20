@@ -1,8 +1,8 @@
 package com.example.gymi.domain.reservation.entity
 
 import com.example.gymi.domain.court.entity.Court
-import com.example.gymi.domain.reservation.enum.CourtNumber
 import com.example.gymi.domain.user.entity.User
+import java.time.ZonedDateTime
 import javax.persistence.*
 
 @Entity
@@ -11,7 +11,7 @@ class Reservation(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
 
-    val courtNumber: CourtNumber,
+    val dateTime: ZonedDateTime, // 코트를 예약한 시점 시간
 
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "court_id")
