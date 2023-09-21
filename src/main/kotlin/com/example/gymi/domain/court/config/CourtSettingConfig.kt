@@ -74,7 +74,7 @@ class CourtSettingConfig(
                 )
             )
         }
-        log.info("========== Court Reservation Setting Success ==========")
+        log.info("========== Court Setting Success ==========")
     }
 
     private fun convertToWeek(dayOfWeek: DayOfWeek): Week {
@@ -113,6 +113,6 @@ class CourtSettingConfig(
                 )
             )
         }
-        log.info("========== Court Reservation Setting Success ==========")
+        log.info("========== Court Setting Success ==========")
     }
 }
