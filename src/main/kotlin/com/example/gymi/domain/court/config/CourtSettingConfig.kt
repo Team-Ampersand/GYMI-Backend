@@ -35,7 +35,7 @@ class CourtSettingConfig(
         if (currentDayOfWeek == DayOfWeek.FRIDAY) {
             fridayCourtEntitySetting(currentHour)
         } else {
-            createCourts(currentDayOfWeek, courtMaxCount, currentHour)
+            courtEntitySetting(currentDayOfWeek, courtMaxCount, currentHour)
         }
     }
 
@@ -47,7 +47,7 @@ class CourtSettingConfig(
         }
     }
 
-    private fun createCourts(
+    private fun courtEntitySetting(
         currentDayOfWeek: DayOfWeek,
         courtMaxCount: Int,
         currentHour: Int
