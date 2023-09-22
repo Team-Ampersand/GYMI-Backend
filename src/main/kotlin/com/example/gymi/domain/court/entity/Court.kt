@@ -40,10 +40,14 @@ class Court(
 ) {
 
     fun addCount() {
-        count += 1
+        synchronized(this) {
+            count += 1
+        }
     }
 
     fun removeCount() {
-        count -= 1
+        synchronized(this) {
+            count -= 1
+        }
     }
 }
