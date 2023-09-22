@@ -1,7 +1,6 @@
 package com.example.gymi.domain.reservation.presentation
 
 import com.example.gymi.domain.court.enum.CourtNumber
-import com.example.gymi.domain.reservation.service.CourtReservationCancelService
 import com.example.gymi.domain.reservation.service.CourtReservationService
 import com.example.gymi.global.annotation.RequestController
 import org.springframework.http.ResponseEntity
@@ -10,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam
 
 @RequestController("/reservation")
 class ReservationController(
-    private val courtReservationService: CourtReservationService,
-    private val courtReservationCancelService: CourtReservationCancelService
+    private val courtReservationService: CourtReservationService
 ) {
 
     @PostMapping
