@@ -60,19 +60,8 @@ class CourtSettingConfig(
                 else -> ""
             }
 
-            courtRepository.save(
-                Court(
-                    id = index + 1L,
-                    name = "체육관 코트",
-                    maxCount = courtMaxCount,
-                    courtNumber = courtNumber,
-                    week = convertToWeek(currentDayOfWeek),
-                    dayPeriod = determineDayPeriod(currentHour),
-                    reservations = listOf(),
-                    activity = Activity(index + 1L, activityText)
-                        .let { activityRepository.save(it) }
-                )
-            )
+            saveCourt(index, courtNumber, courtMaxCount, currentDayOfWeek, currentHour, activityText)
+
         }
         log.info("========== Court Setting Success ==========")
     }
@@ -96,22 +85,39 @@ class CourtSettingConfig(
         }
     }
 
+    private fun saveActivity(index: Int, activityText: String): Activity {
+        return Activity(index + 1L, activityText).let { activityRepository.save(it) }
+    }
+
+    private fun saveCourt(
+        index: Int,
+        courtNumber: CourtNumber,
+        courtMaxCount: Int,
+        currentDayOfWeek: DayOfWeek,
+        currentHour: Int,
+        activityText: String
+    ) {
+        courtRepository.save(
+            Court(
+                id = index + 1L,
+                name = "체육관 코트",
+                maxCount = courtMaxCount,
+                courtNumber = courtNumber,
+                week = convertToWeek(currentDayOfWeek),
+                dayPeriod = determineDayPeriod(currentHour),
+                reservations = listOf(),
+                activity = saveActivity(index, activityText)
+            )
+        )
+    }
+
     private fun fridayCourtEntitySetting(currentHour: Int) {
         for ((index, courtNumber) in courtNumbers.withIndex()) {
 
-            courtRepository.save(
-                Court(
-                    id = index + 1L,
-                    name = "체육관 코트",
-                    maxCount = if (index < 2) 10 else 4,
-                    courtNumber = courtNumber,
-                    week = Week.FRIDAY,
-                    dayPeriod = determineDayPeriod(currentHour),
-                    reservations = listOf(),
-                    activity = Activity(index + 1L, "배드민턴, 농구")
-                        .let { activityRepository.save(it) }
-                )
-            )
+            val courtMaxCount = if (index < 2) 10 else 4
+
+            saveCourt(index, courtNumber, courtMaxCount, DayOfWeek.FRIDAY, currentHour, "농구, 배드민턴")
+
         }
         log.info("========== Court Setting Success ==========")
     }
