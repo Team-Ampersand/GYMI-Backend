@@ -15,6 +15,8 @@ class Court(
     @Column(length = 30)
     val name: String,
 
+    var count: Int = 0,
+
     val maxCount: Int,
 
     @Enumerated(EnumType.STRING)
@@ -35,4 +37,13 @@ class Court(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_id")
     val activity: Activity // (배구, 농구, 배드민턴 등)
-)
+) {
+
+    fun addCount() {
+        count += 1
+    }
+
+    fun removeCount() {
+        count -= 1
+    }
+}
