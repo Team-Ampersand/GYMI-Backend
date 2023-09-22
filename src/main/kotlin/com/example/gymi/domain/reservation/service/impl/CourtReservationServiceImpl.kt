@@ -4,6 +4,7 @@ import com.example.gymi.domain.court.enum.CourtNumber
 import com.example.gymi.domain.court.repository.CourtRepository
 import com.example.gymi.domain.reservation.exception.CourtReservationOverException
 import com.example.gymi.domain.reservation.service.CourtReservationService
+import com.example.gymi.domain.reservation.util.FindReservationCountUtil
 import com.example.gymi.domain.reservation.util.SaveCourtReservationUtil
 import com.example.gymi.domain.reservation.util.ValidDayOfWeekAndHourOrMinuteUtil
 import com.example.gymi.domain.user.enums.ReservationStatus
@@ -14,9 +15,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional(rollbackFor = [Exception::class])
 class CourtReservationServiceImpl(
-
     private val userUtil: UserUtil,
-    private val courtRepository: CourtRepository,
+    private val findReservationCountUtil: FindReservationCountUtil,
     private val saveCourtReservationUtil: SaveCourtReservationUtil,
     private val validDayOfWeekAndHourOrMinuteUtil: ValidDayOfWeekAndHourOrMinuteUtil
 ) : CourtReservationService {
@@ -26,7 +26,7 @@ class CourtReservationServiceImpl(
 
         val user = userUtil.currentUser()
 
-        val court = courtRepository.findByCourtNumber(courtNumber)
+        val court = findReservationCountUtil.findReservationCount(courtNumber)
 
         if (court.count >= court.maxCount) {
             throw CourtReservationOverException()

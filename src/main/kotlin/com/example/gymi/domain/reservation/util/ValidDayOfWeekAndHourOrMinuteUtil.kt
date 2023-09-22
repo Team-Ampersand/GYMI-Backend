@@ -10,7 +10,9 @@ import java.time.LocalDateTime
 
 @Component
 class ValidDayOfWeekAndHourOrMinuteUtil(
-    private val currentTime: LocalDateTime? = null
+    private val currentTime: LocalDateTime? = null,
+    private val COURT_RESERVATION_HOURS: Set<Int> = setOf(11, 17),
+    private val COURT_RESERVATION_MINUTE: Int = 30
 ) {
 
     fun validateApply() {
@@ -22,7 +24,7 @@ class ValidDayOfWeekAndHourOrMinuteUtil(
         if (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY)
             throw NotCourtReservationDayException()
 
-        if (!((hour == 11 && minute >= 30) || (hour == 17 && minute >= 30))) {
+        if(!(COURT_RESERVATION_HOURS.contains(hour) && minute >= COURT_RESERVATION_MINUTE)) {
             throw NotCourtReservationHourOrMinuteException()
         }
     }
@@ -35,7 +37,8 @@ class ValidDayOfWeekAndHourOrMinuteUtil(
         if (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY)
             throw NotCourtReservationCancelDayException()
 
-        if (hour != 11 && hour != 17)
+        if (!(COURT_RESERVATION_HOURS.contains(hour))) {
             throw NotCourtReservationCancelHourOrMinuteException()
+        }
     }
 }
