@@ -9,7 +9,7 @@ import javax.persistence.*
 class Reservation(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long = 0,
 
     val dateTime: ZonedDateTime, // 코트를 예약한 시점 시간
 

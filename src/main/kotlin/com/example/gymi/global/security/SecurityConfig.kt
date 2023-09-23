@@ -46,6 +46,8 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/notice").authenticated()
             .antMatchers(HttpMethod.GET, "/notice/{id}").authenticated()
 
+            .antMatchers(HttpMethod.POST, "/reservation").authenticated()
+
             .anyRequest().denyAll()
             .and()
             .exceptionHandling()

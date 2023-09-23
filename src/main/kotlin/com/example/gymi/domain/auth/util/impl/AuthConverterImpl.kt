@@ -7,6 +7,7 @@ import com.example.gymi.domain.auth.presentation.data.request.DeviceTokenRequest
 import com.example.gymi.domain.auth.presentation.data.request.SignInRequestDto
 import com.example.gymi.domain.auth.util.AuthConverter
 import com.example.gymi.domain.user.entity.User
+import com.example.gymi.domain.user.enums.ReservationStatus
 import com.example.gymi.domain.user.enums.Role
 import gauth.GAuthUserInfo
 import org.springframework.stereotype.Component
@@ -32,7 +33,8 @@ class AuthConverterImpl : AuthConverter {
             grade = gAuthUserInfo.grade,
             classNum = gAuthUserInfo.classNum,
             number = gAuthUserInfo.num,
-            roles = mutableListOf(Role.ROLE_STUDENT)
+            roles = mutableListOf(Role.ROLE_STUDENT),
+            reservationStatus = ReservationStatus.CAN
         )
 
     override fun toAdminEntity(gAuthUserInfo: GAuthUserInfo): User =
@@ -43,7 +45,8 @@ class AuthConverterImpl : AuthConverter {
             grade = 0,
             classNum = 0,
             number = 0,
-            roles = mutableListOf(Role.ROLE_ADMIN)
+            roles = mutableListOf(Role.ROLE_ADMIN),
+            reservationStatus = ReservationStatus.CAN
         )
 
     override fun toTeacherEntity(gAuthUserInfo: GAuthUserInfo): User =
@@ -54,7 +57,8 @@ class AuthConverterImpl : AuthConverter {
             grade = 0,
             classNum = 0,
             number = 0,
-            roles = mutableListOf(Role.ROLE_TEACHER)
+            roles = mutableListOf(Role.ROLE_TEACHER),
+            reservationStatus = ReservationStatus.CAN
         )
 
     override fun toEntity(userInfo: User, refreshToken: String): RefreshToken =
