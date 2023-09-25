@@ -8,5 +8,5 @@ import javax.persistence.LockModeType
 
 interface CourtRepository : CrudRepository<Court, Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    fun findCourtByIdAndCourtNumber(id: Long, courtNumber: CourtNumber): Court
+    fun findCourtByCourtNumber(courtNumber: CourtNumber): Court
 }

@@ -10,5 +10,5 @@ class FindReservationCountUtil(
     private val courtRepository: CourtRepository
 ) {
     fun findReservationCount(courtNumber: CourtNumber): Court =
-        courtRepository.findCourtByIdAndCourtNumber(1L, courtNumber)
+        courtRepository.findCourtByCourtNumber(courtNumber)
 }
