@@ -12,14 +12,17 @@ class CourtReservationCheckUtil(
 ) {
     fun reservationCheck(courtNumber: CourtNumber, user: User) {
 
+        if (isReservationNotAppliedAndNoReservation(courtNumber, user)) {
+            throw CourtReservationCancelException()
+        }
+    }
+
+    fun isReservationNotAppliedAndNoReservation(courtNumber: CourtNumber, user: User): Boolean {
+
         val court = findReservationCountUtil.findReservationCount(courtNumber)
 
         val userHasReservation = court.reservations.any { it.user == user }
 
-        if (!userHasReservation && user.reservationStatus != ReservationStatus.APPLIED) {
-            throw CourtReservationCancelException()
-        } else {
-            court.removeCount()
-        }
+        return user.reservationStatus != ReservationStatus.APPLIED && !userHasReservation
     }
 }
