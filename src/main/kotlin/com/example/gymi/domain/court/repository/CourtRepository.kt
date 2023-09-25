@@ -7,9 +7,6 @@ import org.springframework.data.repository.CrudRepository
 import javax.persistence.LockModeType
 
 interface CourtRepository : CrudRepository<Court, Long> {
-
-    fun findByCourtNumber(courtNumber: CourtNumber): Court
-
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     fun findCourtByIdAndCourtNumber(id: Long, courtNumber: CourtNumber): Court
 }
