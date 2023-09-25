@@ -2,7 +2,7 @@ package com.example.gymi.domain.reservation.service.impl
 
 import com.example.gymi.domain.court.enum.CourtNumber
 import com.example.gymi.domain.reservation.repository.ReservationRepository
-import com.example.gymi.domain.reservation.service.CourtReservationCancelService
+import com.example.gymi.domain.reservation.service.CancelCourtReservationService
 import com.example.gymi.domain.reservation.util.CourtReservationCheckUtil
 import com.example.gymi.domain.reservation.util.ValidDayOfWeekAndHourOrMinuteUtil
 import com.example.gymi.domain.user.enums.ReservationStatus
@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional(rollbackFor = [Exception::class])
-class CourtReservationCancelServiceImpl(
+class CancelCourtReservationServiceImpl(
     private val userUtil: UserUtil,
     private val reservationRepository: ReservationRepository,
     private val courtReservationCheckUtil: CourtReservationCheckUtil,
     private val validDayOfWeekAndHourOrMinuteUtil: ValidDayOfWeekAndHourOrMinuteUtil
-) : CourtReservationCancelService {
+) : CancelCourtReservationService {
 
     override fun execute(courtNumber: CourtNumber) {
 
