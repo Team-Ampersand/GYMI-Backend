@@ -1,5 +1,6 @@
 package com.example.gymi.domain.reservation.util
 
+import com.example.gymi.domain.court.entity.Court
 import com.example.gymi.domain.court.enum.CourtNumber
 import com.example.gymi.domain.reservation.exception.CourtReservationCancelException
 import com.example.gymi.domain.user.entity.User
@@ -12,14 +13,16 @@ class CourtReservationCheckUtil(
 ) {
     fun reservationCheck(courtNumber: CourtNumber, user: User) {
 
-        if (isReservationNotAppliedAndNoReservation(courtNumber, user)) {
+        val court = findReservationCountUtil.findReservationCount(courtNumber)
+
+        if (isReservationNotAppliedAndNoReservation(courtNumber, user, court)) {
             throw CourtReservationCancelException()
+        } else {
+            court.removeCount()
         }
     }
 
-    fun isReservationNotAppliedAndNoReservation(courtNumber: CourtNumber, user: User): Boolean {
-
-        val court = findReservationCountUtil.findReservationCount(courtNumber)
+    fun isReservationNotAppliedAndNoReservation(courtNumber: CourtNumber, user: User, court: Court): Boolean {
 
         val userHasReservation = court.reservations.any { it.user == user }
 
