@@ -2,6 +2,7 @@ package com.example.gymi.domain.reservation.service.impl
 
 import com.example.gymi.domain.court.enum.CourtNumber
 import com.example.gymi.domain.court.repository.CourtRepository
+import com.example.gymi.domain.reservation.exception.AlreadyReservationCourtExistsException
 import com.example.gymi.domain.reservation.exception.CourtReservationOverException
 import com.example.gymi.domain.reservation.service.CourtReservationService
 import com.example.gymi.domain.reservation.util.FindReservationCountUtil
@@ -30,6 +31,10 @@ class CourtReservationServiceImpl(
 
         if (court.count >= court.maxCount) {
             throw CourtReservationOverException()
+        }
+
+        if (user.reservationStatus == ReservationStatus.APPLIED) {
+            throw AlreadyReservationCourtExistsException()
         }
 
         court.addCount()
