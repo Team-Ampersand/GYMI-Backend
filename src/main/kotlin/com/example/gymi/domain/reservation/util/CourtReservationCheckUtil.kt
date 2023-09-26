@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component
 
 @Component
 class CourtReservationCheckUtil(
-    private val findReservationCountUtil: FindReservationCountUtil
+    private val findReservationCourtUtil: FindReservationCourtUtil
 ) {
     fun reservationCheck(courtNumber: CourtNumber, user: User) {
 
-        val court = findReservationCountUtil.findReservationCount(courtNumber)
+        val court = findReservationCourtUtil.findReservationCount(courtNumber)
 
         if (isReservationNotAppliedAndNoReservation(courtNumber, user, court)) {
             throw CourtReservationCancelException()

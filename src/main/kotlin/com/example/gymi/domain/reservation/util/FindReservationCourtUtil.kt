@@ -6,7 +6,7 @@ import com.example.gymi.domain.court.repository.CourtRepository
 import org.springframework.stereotype.Component
 
 @Component
-class FindReservationCountUtil(
+class FindReservationCourtUtil(
     private val courtRepository: CourtRepository
 ) {
     fun findReservationCount(courtNumber: CourtNumber): Court =
