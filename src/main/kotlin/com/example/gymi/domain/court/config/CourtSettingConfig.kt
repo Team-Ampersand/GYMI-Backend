@@ -79,8 +79,8 @@ class CourtSettingConfig(
 
     private fun determineDayPeriod(currentHour: Int): DayPeriod {
         return when {
-            currentHour > 12 -> DayPeriod.LUNCH
             currentHour > 18 -> DayPeriod.EVENING
+            currentHour > 12 -> DayPeriod.LUNCH
             else -> DayPeriod.MORNING
         }
     }
