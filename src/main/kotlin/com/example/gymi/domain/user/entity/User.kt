@@ -1,5 +1,6 @@
 package com.example.gymi.domain.user.entity
 
+import com.example.gymi.domain.user.enums.ReservationStatus
 import com.example.gymi.domain.user.enums.Role
 import org.hibernate.annotations.DynamicUpdate
 import org.hibernate.annotations.GenericGenerator
@@ -30,5 +31,13 @@ class User(
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "Role", joinColumns = [JoinColumn(name = "user_id")])
-    var roles: MutableList<Role> = mutableListOf()
-)
+    var roles: MutableList<Role> = mutableListOf(),
+
+    @Enumerated(EnumType.STRING)
+    var reservationStatus: ReservationStatus
+) {
+
+    fun updateReservationStatus(reservationStatus: ReservationStatus) {
+        this.reservationStatus = reservationStatus
+    }
+}

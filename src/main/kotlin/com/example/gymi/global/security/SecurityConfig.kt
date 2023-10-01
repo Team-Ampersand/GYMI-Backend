@@ -46,6 +46,12 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/notice").authenticated()
             .antMatchers(HttpMethod.GET, "/notice/{id}").authenticated()
 
+            .antMatchers(HttpMethod.POST, "/reservation").authenticated()
+            .antMatchers(HttpMethod.DELETE, "/reservation").authenticated()
+
+            .antMatchers(HttpMethod.GET, "/court").authenticated()
+            .antMatchers(HttpMethod.GET, "/court/{courtNumber}").authenticated()
+
             .anyRequest().denyAll()
             .and()
             .exceptionHandling()
