@@ -1,8 +1,10 @@
 package com.example.gymi.domain.court.presentation
 
 import com.example.gymi.domain.court.enum.CourtNumber
+import com.example.gymi.domain.court.presentation.data.response.ListReservationCourtInfoResponseDto
 import com.example.gymi.domain.court.presentation.data.response.ReservationCourtInfoResponseDto
 import com.example.gymi.domain.court.service.GetCourtInfoService
+import com.example.gymi.domain.court.service.ListCourtInfoService
 import com.example.gymi.global.annotation.RequestController
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,8 +15,13 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestController("/court")
 class CourtController(
-    private val getCourtInfoService: GetCourtInfoService
+    private val getCourtInfoService: GetCourtInfoService,
+    private val listCourtInfoService: ListCourtInfoService
 ) {
+    @GetMapping
+    fun listCourtInfo(): ResponseEntity<ListReservationCourtInfoResponseDto> =
+        listCourtInfoService.execute()
+            .let { ResponseEntity.status(HttpStatus.OK).body(it) }
 
     @GetMapping("/{courtNumber}")
     fun getCourtInfo(@PathVariable courtNumber: CourtNumber): ResponseEntity<ReservationCourtInfoResponseDto> =
