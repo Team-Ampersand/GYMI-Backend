@@ -52,6 +52,8 @@ class SecurityConfig(
             .antMatchers(HttpMethod.GET, "/court").authenticated()
             .antMatchers(HttpMethod.GET, "/court/{courtNumber}").authenticated()
 
+            .antMatchers(HttpMethod.GET, "/user").authenticated()
+
             .anyRequest().denyAll()
             .and()
             .exceptionHandling()
